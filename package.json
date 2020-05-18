@@ -1,0 +1,25 @@
+{
+  "name": "addon-api-tutorial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onurpolattimur/node-addon-api-tutorial.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/onurpolattimur/node-addon-api-tutorial/issues"
+  },
+  "homepage": "https://github.com/onurpolattimur/node-addon-api-tutorial#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "bindings": "^1.5.0",
+    "nan": "^2.14.1",
+    "node-addon-api": "^3.0.0"
+  }
+}

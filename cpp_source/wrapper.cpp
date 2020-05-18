@@ -9,6 +9,7 @@ Napi::Object Wrapper::Init(Napi::Env env, Napi::Object exports)
     Napi::HandleScope scope(env);
 
     Napi::Function func = DefineClass(env, "SimpleMath", {
+        //The names of functions that nodejs calls and what will be invoked on calls.
         InstanceMethod("add", &Wrapper::add),
         InstanceMethod("substract", &Wrapper::substract),
         InstanceMethod("multiply", &Wrapper::multiply),
@@ -17,13 +18,13 @@ Napi::Object Wrapper::Init(Napi::Env env, Napi::Object exports)
 
     constructor = Napi::Persistent(func);
     constructor.SuppressDestruct();
-    exports.Set("SimpleMathNode", func);
+    exports.Set("SimpleMathNode", func); //We will use this name in nodejs application.
     return exports;
 }
 
 Wrapper::Wrapper(const Napi::CallbackInfo &info) : Napi::ObjectWrap<Wrapper>(info)
 {
-    this->simpleMath = new SimpleMath();
+    this->simpleMath = new SimpleMath(); //Create instance only once when our node app created.
 }
 
 Napi::Value Wrapper::add(const Napi::CallbackInfo &info)
@@ -39,6 +40,7 @@ Napi::Value Wrapper::add(const Napi::CallbackInfo &info)
     catch (std::exception &e)
     {
         std::string err = "Exception handled in add: " + std::string(e.what());
+        //If we want to catch exceptions thrown by cpp side in javascript side, we need to add this line. 
         Napi::Error::New(info.Env(), err).ThrowAsJavaScriptException();
         return Napi::Number::New(info.Env(), 0);
     }
